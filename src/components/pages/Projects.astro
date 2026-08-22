@@ -1,0 +1,27 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ProjectList from "../ProjectList.astro";
+import { projects } from "../../data/projects";
+import { useTranslations, type Lang } from "../../i18n";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const lede =
+  lang === "ja"
+    ? "開発・保守しているオープンソースプロジェクトの一覧です。"
+    : "Open source projects I develop and maintain.";
+---
+
+<BaseLayout lang={lang} title={t("projects.title")} description={lede}>
+  <div class="container">
+    <h1 class="page-title">{t("projects.title")}</h1>
+    <p class="page-lede">{lede}</p>
+    <div style="margin-top:2.5rem">
+      <ProjectList lang={lang} items={projects} />
+    </div>
+  </div>
+</BaseLayout>

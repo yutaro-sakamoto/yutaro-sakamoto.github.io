@@ -1,0 +1,71 @@
+---
+import { publicationsByYear } from "../data/publications";
+import { useTranslations, type Lang } from "../i18n";
+
+interface Props {
+  lang: Lang;
+  showAbstract?: boolean;
+}
+
+const { lang, showAbstract = true } = Astro.props;
+const t = useTranslations(lang);
+---
+
+{
+  publicationsByYear.length === 0 ? (
+    <p class="empty-note">
+      {lang === "ja"
+        ? "src/data/publications.ts に論文を追加してください。"
+        : "Add entries to src/data/publications.ts."}
+    </p>
+  ) : (
+    <ol class="pub-list">
+      {publicationsByYear.map((pub) => (
+        <li class="pub">
+          <h3 class="pub__title">
+            {pub.url ? (
+              <a href={pub.url} target="_blank" rel="noopener noreferrer">
+                {pub.title}
+              </a>
+            ) : (
+              pub.title
+            )}
+          </h3>
+          <p class="pub__authors">
+            {pub.authors.map((author, index) => (
+              <>
+                {index > 0 && ", "}
+                <span class={author.self ? "self" : undefined}>
+                  {author.name}
+                </span>
+              </>
+            ))}
+          </p>
+          <p class="pub__venue">
+            <em>{pub.venue}</em>
+            {pub.detail ? `, ${pub.detail}` : ""} ({pub.year})
+          </p>
+          {showAbstract && pub.abstract && (
+            <p class="pub__abstract">{pub.abstract[lang]}</p>
+          )}
+          <p class="pub__links">
+            {pub.url && (
+              <a href={pub.url} target="_blank" rel="noopener noreferrer">
+                {t("publications.pdf")}
+              </a>
+            )}
+            {pub.doi && (
+              <a
+                href={`https://doi.org/${pub.doi}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                DOI: {pub.doi}
+              </a>
+            )}
+          </p>
+        </li>
+      ))}
+    </ol>
+  )
+}

@@ -1,0 +1,26 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import CertificationList from "../CertificationList.astro";
+import { useTranslations, type Lang } from "../../i18n";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const lede =
+  lang === "ja"
+    ? "取得している資格の一覧です。"
+    : "Professional certifications I currently hold.";
+---
+
+<BaseLayout lang={lang} title={t("certifications.title")} description={lede}>
+  <div class="container container--narrow">
+    <h1 class="page-title">{t("certifications.title")}</h1>
+    <p class="page-lede">{lede}</p>
+    <div style="margin-top:2.5rem">
+      <CertificationList lang={lang} />
+    </div>
+  </div>
+</BaseLayout>

@@ -1,0 +1,63 @@
+---
+import { alternatePath, localePath, useTranslations, type Lang } from "../i18n";
+import Icon from "./Icon.astro";
+import ThemeToggle from "./ThemeToggle.astro";
+
+interface Props {
+  lang: Lang;
+  /** 対訳ページのURL。省略時は同じパスのもう一方の言語版。 */
+  alternate?: string;
+}
+
+const { lang, alternate } = Astro.props;
+const t = useTranslations(lang);
+const here = Astro.url.pathname.replace(/\/+$/, "") || "/";
+const alternateHref = alternate ?? alternatePath(lang, here);
+
+const links = [
+  { href: localePath(lang, "/"), label: t("nav.home") },
+  { href: localePath(lang, "/projects"), label: t("nav.projects") },
+  { href: localePath(lang, "/certifications"), label: t("nav.certifications") },
+  { href: localePath(lang, "/publications"), label: t("nav.publications") },
+  { href: localePath(lang, "/blog"), label: t("nav.blog") },
+];
+
+const isCurrent = (href: string) =>
+  href === "/" || href === "/en" ? here === href : here.startsWith(href);
+---
+
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a class="brand" href={localePath(lang, "/")}>Yutaro Sakamoto</a>
+    <nav
+      class="site-nav"
+      aria-label={lang === "ja" ? "サイト内ナビゲーション" : "Site navigation"}
+    >
+      {
+        links.map((link) => (
+          <a
+            href={link.href}
+            aria-current={isCurrent(link.href) ? "page" : undefined}
+          >
+            {link.label}
+          </a>
+        ))
+      }
+      <span class="header-tools">
+        <a
+          class="icon-button lang-switch"
+          href={alternateHref}
+          hreflang={lang === "ja" ? "en" : "ja"}
+          lang={lang === "ja" ? "en" : "ja"}>{t("lang.switch")}</a
+        >
+        <a
+          class="icon-button"
+          href={lang === "ja" ? "/rss.xml" : "/en/rss.xml"}
+          aria-label="RSS"
+          title="RSS"><Icon name="rss" /></a
+        >
+        <ThemeToggle />
+      </span>
+    </nav>
+  </div>
+</header>

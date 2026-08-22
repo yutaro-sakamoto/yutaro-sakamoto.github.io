@@ -1,0 +1,35 @@
+---
+import { profile } from "../data/profile";
+import { useTranslations, type Lang } from "../i18n";
+import Icon from "./Icon.astro";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container site-footer__inner">
+    <p>&copy; {year} {profile.name[lang]} &middot; {t("footer.builtWith")}</p>
+    <p class="hero__links">
+      {
+        profile.links.map((link) => (
+          <a
+            class="icon-button"
+            href={link.href}
+            aria-label={link.label}
+            title={link.label}
+            target="_blank"
+            rel="me noopener noreferrer"
+          >
+            <Icon name={link.icon ?? "mail"} />
+          </a>
+        ))
+      }
+    </p>
+  </div>
+</footer>

@@ -1,0 +1,40 @@
+---
+import type { TimelineEntry } from "../data/profile";
+import type { Lang } from "../i18n";
+
+interface Props {
+  lang: Lang;
+  entries: TimelineEntry[];
+}
+
+const { lang, entries } = Astro.props;
+---
+
+<ul class="entry-list">
+  {
+    entries.map((entry) => (
+      <li class="entry">
+        <span class="entry__period">{entry.period[lang]}</span>
+        <div>
+          <h3 class="entry__title">{entry.title[lang]}</h3>
+          <p class="entry__org">
+            {entry.organizationUrl ? (
+              <a
+                href={entry.organizationUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {entry.organization[lang]}
+              </a>
+            ) : (
+              entry.organization[lang]
+            )}
+          </p>
+          {entry.description && (
+            <p class="entry__desc">{entry.description[lang]}</p>
+          )}
+        </div>
+      </li>
+    ))
+  }
+</ul>

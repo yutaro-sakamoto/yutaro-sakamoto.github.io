@@ -1,0 +1,66 @@
+---
+import { categoryLabel, certificationsByDate } from "../data/certifications";
+import { useTranslations, type Lang } from "../i18n";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const formatMonth = (value: string) => {
+  const [year, month] = value.split("-");
+  if (!year || !month) return value;
+  return lang === "ja"
+    ? `${year}年${Number(month)}月`
+    : new Intl.DateTimeFormat("en-US", {
+        year: "numeric",
+        month: "short",
+        timeZone: "UTC",
+      }).format(new Date(`${value}-01T00:00:00Z`));
+};
+---
+
+{
+  certificationsByDate.length === 0 ? (
+    <p class="empty-note">
+      {lang === "ja"
+        ? "src/data/certifications.ts に資格を追加してください。"
+        : "Add entries to src/data/certifications.ts."}
+    </p>
+  ) : (
+    <ul class="cert-list">
+      {certificationsByDate.map((cert) => (
+        <li class="cert">
+          <span
+            class="cert__mark"
+            data-category={cert.category}
+            aria-hidden="true"
+          >
+            {categoryLabel[cert.category]}
+          </span>
+          <div>
+            <h3 class="cert__name">{cert.name[lang]}</h3>
+            <p class="cert__meta">
+              <span>{cert.issuer[lang]}</span>
+              <span>
+                {t("certifications.issued")}: {formatMonth(cert.issued)}
+                {cert.expires ? ` – ${formatMonth(cert.expires)}` : ""}
+              </span>
+              {cert.verifyUrl && (
+                <a
+                  href={cert.verifyUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {t("certifications.verify")}
+                </a>
+              )}
+            </p>
+          </div>
+        </li>
+      ))}
+    </ul>
+  )
+}
