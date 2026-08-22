@@ -44,10 +44,12 @@ const formatMonth = (value: string) => {
             <h3 class="cert__name">{cert.name[lang]}</h3>
             <p class="cert__meta">
               <span>{cert.issuer[lang]}</span>
-              <span>
-                {t("certifications.issued")}: {formatMonth(cert.issued)}
-                {cert.expires ? ` – ${formatMonth(cert.expires)}` : ""}
-              </span>
+              {cert.issued && (
+                <span>
+                  {t("certifications.issued")}: {formatMonth(cert.issued)}
+                  {cert.expires ? ` – ${formatMonth(cert.expires)}` : ""}
+                </span>
+              )}
               {cert.verifyUrl && (
                 <a
                   href={cert.verifyUrl}
