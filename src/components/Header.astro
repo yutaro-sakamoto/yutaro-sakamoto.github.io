@@ -26,7 +26,7 @@ const isCurrent = (href: string) =>
 
 <header class="site-header">
   <div class="container site-header__inner">
-    <a class="brand" href={localePath(lang, "/")}>{site.name}</a>
+    <a class="brand" href={localePath(lang, "/")}>{site.name[lang]}</a>
     <nav
       class="site-nav"
       aria-label={lang === "ja" ? "サイト内ナビゲーション" : "Site navigation"}

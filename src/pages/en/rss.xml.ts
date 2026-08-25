@@ -6,7 +6,7 @@ import { getPosts, postPath } from "../../utils/posts";
 export async function GET(context: APIContext) {
   const posts = await getPosts("en");
   return rss({
-    title: site.name,
+    title: site.name.en,
     description: site.description.en,
     site: context.site!,
     trailingSlash: false,

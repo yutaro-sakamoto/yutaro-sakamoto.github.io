@@ -31,7 +31,7 @@ const {
   alternate,
   hasTranslation = true,
 } = Astro.props;
-const siteName = site.name;
+const siteName = site.name[lang];
 const pageTitle = title
   ? `${title} | ${siteName}`
   : `${siteName} — ${site.tagline[lang]}`;

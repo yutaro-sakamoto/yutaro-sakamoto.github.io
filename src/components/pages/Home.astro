@@ -20,7 +20,7 @@ const posts = await getPosts(lang);
   <div class="container container--narrow">
     <section class="hero">
       <div>
-        <h1 class="hero__name">{site.name}</h1>
+        <h1 class="hero__name">{site.name[lang]}</h1>
         <p class="hero__sub">{site.tagline[lang]}</p>
       </div>
       <p class="hero__headline">{site.description[lang]}</p>

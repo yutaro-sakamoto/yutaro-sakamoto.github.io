@@ -1,6 +1,6 @@
-# Parse & Prove — yutaro-sakamoto.github.io
+# だいたい動く — yutaro-sakamoto.github.io
 
-坂本優太郎の技術ブログ **Parse & Prove** のソースコードです。
+坂本優太郎の技術ブログ **だいたい動く (Mostly Works)** のソースコードです。
 トップページが記事一覧で、`/about` に自己紹介ページがあります。
 [Astro](https://astro.build/) で静的サイトとしてビルドし、GitHub Actions で GitHub Pages に公開しています。
 
