@@ -13,9 +13,9 @@
   - 数式は TeX 記法 (`$...$` / `$$...$$`) で書き、[KaTeX](https://katex.org/) がビルド時にHTMLへ変換。
     数式を含むページだけ KaTeX の CSS を読み込みます。
   - フロントマターは Zod で検証されるため、項目の書き間違いはビルドで落ちます。
-- **プロフィール** — OSS活動・保有資格・論文・経歴をデータファイルで管理し、日英両方のページに反映。
+- **プロフィール** — OSS活動・保有資格・論文・学歴をデータファイルで管理し、日英両方のページに反映。
 - RSS (`/rss.xml`, `/en/rss.xml`)、`sitemap-index.xml`、OGPメタタグ、ダークモードを標準で用意。
-- 旧 Hugo サイトの `/post/...`, `/posts/...` は新URLへリダイレクトします。
+- 旧 Hugo サイトの `/posts/about` はトップページの自己紹介へリダイレクトします。
 
 ## ディレクトリ構成
 
@@ -25,7 +25,7 @@ src/
 ├── data/
 │   ├── blog/ja/*.md         日本語記事
 │   ├── blog/en/*.md         英語記事
-│   ├── profile.ts           プロフィール・経歴・学歴・受賞
+│   ├── profile.ts           プロフィール・学歴・受賞
 │   ├── projects.ts          OSS活動・開発実績
 │   ├── certifications.ts    保有資格
 │   └── publications.ts      論文・発表
@@ -79,14 +79,14 @@ Node.js 22 以上が必要です。
 
 ## プロフィールを更新する
 
-| 更新したいもの   | 編集するファイル             |
-| ---------------- | ---------------------------- |
-| 自己紹介・SNS    | `src/data/profile.ts`        |
-| 経歴・学歴・受賞 | `src/data/profile.ts`        |
-| OSS活動          | `src/data/projects.ts`       |
-| 保有資格         | `src/data/certifications.ts` |
-| 論文・発表       | `src/data/publications.ts`   |
-| 画面の文言       | `src/i18n/index.ts`          |
+| 更新したいもの | 編集するファイル             |
+| -------------- | ---------------------------- |
+| 自己紹介・SNS  | `src/data/profile.ts`        |
+| 学歴・受賞     | `src/data/profile.ts`        |
+| OSS活動        | `src/data/projects.ts`       |
+| 保有資格       | `src/data/certifications.ts` |
+| 論文・発表     | `src/data/publications.ts`   |
+| 画面の文言     | `src/i18n/index.ts`          |
 
 いずれも日本語 (`ja`) と英語 (`en`) の両方を書くと、両言語のページに反映されます。
 

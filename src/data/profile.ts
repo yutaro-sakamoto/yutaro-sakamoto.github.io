@@ -4,7 +4,7 @@ export type Link = {
   label: string;
   href: string;
   /** ヘッダー/フッターのアイコン識別子 (src/components/Icon.astro を参照) */
-  icon?: "github" | "twitter" | "mail" | "rss" | "scholar";
+  icon?: "github" | "mail" | "rss" | "scholar";
 };
 
 export type TimelineEntry = {
@@ -26,15 +26,13 @@ export const profile = {
     en: "Compiler and language-tooling developer, focused on legacy system modernization and the cloud platforms around it.",
   } satisfies Localized,
   bio: {
-    ja: `東京システムハウス株式会社でソフトウェアエンジニアとして働いています。
-COBOLをJavaへ変換するOSSコンパイラ **opensource COBOL 4J** の主要開発者であり、
+    ja: `COBOLをJavaへ変換するOSSコンパイラ **opensource COBOL 4J** の主要開発者であり、
 COBOL向けの構文解析器 **tree-sitter-cobol** も開発しています。
-大学・大学院ではグラフ理論を研究し、ハミルトン閉路に関する論文を執筆しました。
+大学・大学院ではグラフ理論を研究していました。
 関数型プログラミング、定理証明支援系、形式手法にも関心があります。`,
-    en: `I am a software engineer at Tokyo System House Co., Ltd.
-I am the lead developer of **opensource COBOL 4J**, an open source compiler that translates COBOL into Java,
+    en: `I am the lead developer of **opensource COBOL 4J**, an open source compiler that translates COBOL into Java,
 and the author of **tree-sitter-cobol**, an incremental parser for COBOL.
-I studied graph theory in university and published work on Hamilton cycles.
+I studied graph theory at university.
 I am also interested in functional programming, proof assistants and formal methods.`,
   } satisfies Localized,
   location: { ja: "東京, 日本", en: "Tokyo, Japan" } satisfies Localized,
@@ -44,11 +42,6 @@ I am also interested in functional programming, proof assistants and formal meth
       label: "GitHub",
       href: "https://github.com/yutaro-sakamoto",
       icon: "github",
-    },
-    {
-      label: "X (Twitter)",
-      href: "https://twitter.com/Yutaro_Sakamoto",
-      icon: "twitter",
     },
   ] satisfies Link[],
   interests: {
@@ -71,22 +64,6 @@ I am also interested in functional programming, proof assistants and formal meth
   },
 };
 
-export const career: TimelineEntry[] = [
-  {
-    period: { ja: "2019年4月 – 現在", en: "Apr 2019 – Present" },
-    title: { ja: "ソフトウェアエンジニア", en: "Software Engineer" },
-    organization: {
-      ja: "東京システムハウス株式会社",
-      en: "Tokyo System House Co., Ltd.",
-    },
-    organizationUrl: "https://www.tsh-world.co.jp/",
-    description: {
-      ja: "COBOL資産のモダナイゼーションに従事。opensource COBOL 4J をはじめとするOSSの開発・保守と、AWS上での実行基盤の設計を担当。",
-      en: "Working on COBOL modernization: developing and maintaining opensource COBOL 4J and related open source tooling, and designing the AWS platforms that run the migrated workloads.",
-    },
-  },
-];
-
 export const education: TimelineEntry[] = [
   {
     period: { ja: "2017年4月 – 2019年3月", en: "Apr 2017 – Mar 2019" },
@@ -99,10 +76,7 @@ export const education: TimelineEntry[] = [
       en: "The University of Electro-Communications",
     },
     organizationUrl: "https://www.uec.ac.jp/",
-    description: {
-      ja: "グラフ理論を専攻し、一般化ペテルセングラフのハミルトン閉路について研究。",
-      en: "Studied graph theory, focusing on Hamilton cycles in generalized Petersen graphs.",
-    },
+    description: { ja: "グラフ理論を研究。", en: "Studied graph theory." },
   },
   {
     period: { ja: "2013年4月 – 2017年3月", en: "Apr 2013 – Mar 2017" },

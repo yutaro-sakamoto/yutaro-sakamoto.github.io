@@ -50,37 +50,6 @@ can work with real COBOL syntax trees. Both fixed-format and free-format source 
     tags: ["COBOL", "tree-sitter", "Parser", "C"],
     stars: 38,
   },
-  {
-    name: "Open COBOL ESQL 4J",
-    href: "https://github.com/opensourcecobol/Open-COBOL-ESQL-4j",
-    role: { ja: "コントリビュータ", en: "Contributor" },
-    description: {
-      ja: "opensource COBOL 4J と PostgreSQL のための埋め込みSQL (EXEC SQL) プリコンパイラと実行時ライブラリ。",
-      en: "An embedded SQL (EXEC SQL) precompiler and runtime library for opensource COBOL 4J and PostgreSQL.",
-    },
-    tags: ["COBOL", "SQL", "PostgreSQL"],
-    stars: 21,
-  },
-  {
-    name: "CobolLens",
-    href: "https://github.com/yutaro-sakamoto/CobolLens",
-    role: { ja: "作者", en: "Author" },
-    description: {
-      ja: "Rust製のCOBOLソースコード解析ツール。tree-sitter-cobol の構文木を利用してコードの構造を可視化します。",
-      en: "A COBOL source analysis tool written in Rust, built on top of the tree-sitter-cobol syntax tree.",
-    },
-    tags: ["Rust", "COBOL", "Static analysis"],
-  },
-  {
-    name: "COBOL on AWS starter kit",
-    href: "https://github.com/yutaro-sakamoto/comprehensive-starter-kit-for-opensource-cobol-4j-on-aws",
-    role: { ja: "作者", en: "Author" },
-    description: {
-      ja: "opensource COBOL 4J で変換したアプリケーションをAWS上で動かすための AWS CDK スターターキット。",
-      en: "An AWS CDK starter kit for running applications migrated with opensource COBOL 4J on AWS.",
-    },
-    tags: ["AWS", "CDK", "TypeScript", "COBOL"],
-  },
 ];
 
 export const featuredProjects = projects.filter((p) => p.featured);

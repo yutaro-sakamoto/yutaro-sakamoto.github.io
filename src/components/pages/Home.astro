@@ -6,7 +6,7 @@ import ProjectList from "../ProjectList.astro";
 import CertificationList from "../CertificationList.astro";
 import PublicationList from "../PublicationList.astro";
 import TimelineList from "../TimelineList.astro";
-import { awards, career, education, profile } from "../../data/profile";
+import { awards, education, profile } from "../../data/profile";
 import { featuredProjects } from "../../data/projects";
 import { localePath, useTranslations, type Lang } from "../../i18n";
 import { getPosts } from "../../utils/posts";
@@ -89,13 +89,8 @@ const posts = (await getPosts(lang)).slice(0, 5);
 
     <section class="section">
       <div class="section__head">
-        <h2 class="section__title" id="career">{t("career.title")}</h2>
+        <h2 class="section__title" id="education">{t("education.title")}</h2>
       </div>
-      <TimelineList lang={lang} entries={career} />
-
-      <h3 class="section__title" id="education" style="margin-top:2.5rem">
-        {t("education.title")}
-      </h3>
       <TimelineList lang={lang} entries={education} />
 
       <h3 class="section__title" id="awards" style="margin-top:2.5rem">

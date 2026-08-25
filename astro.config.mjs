@@ -36,10 +36,8 @@ export default defineConfig({
       },
     }),
   ],
-  // 旧 Hugo サイトの URL を維持するためのリダイレクト
+  // 旧 Hugo サイトの自己紹介ページからのリダイレクト
   redirects: {
-    "/post/[...slug]": "/blog/[...slug]",
     "/posts/about": "/#about",
-    "/posts/[...slug]": "/blog/[...slug]",
   },
 });
