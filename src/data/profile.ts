@@ -97,12 +97,14 @@ export const awards: TimelineEntry[] = [
     period: { ja: "2019年3月", en: "Mar 2019" },
     title: { ja: "平成30年度 目黒会賞", en: "Meguro-kai Award (FY2018)" },
     organization: { ja: "電気通信大学 目黒会", en: "UEC Meguro-kai" },
-    organizationUrl: "https://megurokai.jp/web_magazine/commendation190326/",
+    organizationUrl:
+      "https://megurokai.jp/home2/wp-content/uploads/2026/04/H30megurokaisho.pdf",
   },
   {
     period: { ja: "2017年3月", en: "Mar 2017" },
     title: { ja: "平成28年度 目黒会賞", en: "Meguro-kai Award (FY2016)" },
     organization: { ja: "電気通信大学 目黒会", en: "UEC Meguro-kai" },
-    organizationUrl: "https://megurokai.jp/web_magazine/commendation170327/",
+    organizationUrl:
+      "https://megurokai.jp/home2/wp-content/uploads/2026/04/H28megurokaisho.pdf",
   },
 ];

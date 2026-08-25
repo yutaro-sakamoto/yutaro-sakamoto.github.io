@@ -12,8 +12,8 @@ const { lang } = Astro.props;
 const t = useTranslations(lang);
 const lede =
   lang === "ja"
-    ? "開発・保守しているオープンソースプロジェクトの一覧です。"
-    : "Open source projects I develop and maintain.";
+    ? "開発に携わる主要なオープンソースプロジェクトの一覧です。"
+    : "The main open source projects I work on.";
 ---
 
 <BaseLayout lang={lang} title={t("projects.title")} description={lede}>

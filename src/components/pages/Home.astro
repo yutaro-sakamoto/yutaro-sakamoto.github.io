@@ -71,6 +71,16 @@ const posts = (await getPosts(lang)).slice(0, 5);
 
     <section class="section">
       <div class="section__head">
+        <h2 class="section__title" id="posts">{t("home.recentPosts")}</h2>
+        <a class="section__link" href={localePath(lang, "/blog")}
+          >{t("home.viewAll")} →</a
+        >
+      </div>
+      <PostList lang={lang} posts={posts} />
+    </section>
+
+    <section class="section">
+      <div class="section__head">
         <h2 class="section__title" id="certifications">
           {t("certifications.title")}
         </h2>
@@ -87,26 +97,16 @@ const posts = (await getPosts(lang)).slice(0, 5);
       <PublicationList lang={lang} showAbstract={false} />
     </section>
 
-    <section class="section">
+    <section class="section section--muted">
       <div class="section__head">
         <h2 class="section__title" id="education">{t("education.title")}</h2>
       </div>
       <TimelineList lang={lang} entries={education} />
 
-      <h3 class="section__title" id="awards" style="margin-top:2.5rem">
+      <h3 class="section__title" id="awards" style="margin-top:2rem">
         {t("awards.title")}
       </h3>
       <TimelineList lang={lang} entries={awards} />
-    </section>
-
-    <section class="section">
-      <div class="section__head">
-        <h2 class="section__title" id="posts">{t("home.recentPosts")}</h2>
-        <a class="section__link" href={localePath(lang, "/blog")}
-          >{t("home.viewAll")} →</a
-        >
-      </div>
-      <PostList lang={lang} posts={posts} />
     </section>
   </div>
 </BaseLayout>

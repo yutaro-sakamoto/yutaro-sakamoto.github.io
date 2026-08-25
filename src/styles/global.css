@@ -367,6 +367,47 @@ a.pill:hover {
   text-decoration: underline;
 }
 
+/* 学歴・受賞など、実績の補足として控えめに見せるセクション */
+.section--muted {
+  padding-block: 2rem;
+}
+
+.section--muted .section__head {
+  margin-bottom: 0.75rem;
+}
+
+.section--muted .section__title {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--text-faint);
+}
+
+.section--muted .entry {
+  padding: 0.45rem 0;
+  border-bottom: none;
+}
+
+.section--muted .entry__period {
+  font-size: 0.75rem;
+}
+
+.section--muted .entry__title {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.section--muted .entry__org,
+.section--muted .entry__desc {
+  font-size: 0.8125rem;
+  color: var(--text-faint);
+}
+
+.section--muted .entry__desc {
+  margin-top: 0.1rem;
+}
+
 /* ---------------------------------------------------------------- cards */
 .card-grid {
   display: grid;
