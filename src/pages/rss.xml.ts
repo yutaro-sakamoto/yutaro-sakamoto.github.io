@@ -1,13 +1,13 @@
 import rss from "@astrojs/rss";
 import type { APIContext } from "astro";
-import { ui } from "../i18n";
+import { site } from "../data/site";
 import { getPosts, postPath } from "../utils/posts";
 
 export async function GET(context: APIContext) {
   const posts = await getPosts("ja");
   return rss({
-    title: ui.ja["site.title"],
-    description: ui.ja["site.description"],
+    title: site.name,
+    description: site.description.ja,
     site: context.site!,
     trailingSlash: false,
     items: posts.map((post) => ({

@@ -36,8 +36,11 @@ export default defineConfig({
       },
     }),
   ],
-  // 旧 Hugo サイトの自己紹介ページからのリダイレクト
   redirects: {
-    "/posts/about": "/#about",
+    // 旧 Hugo サイトの自己紹介ページ
+    "/posts/about": "/about",
+    // 記事一覧はトップページに統合した
+    "/blog": "/",
+    "/en/blog": "/en",
   },
 });

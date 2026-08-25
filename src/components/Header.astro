@@ -1,5 +1,6 @@
 ---
 import { alternatePath, localePath, useTranslations, type Lang } from "../i18n";
+import { site } from "../data/site";
 import Icon from "./Icon.astro";
 import ThemeToggle from "./ThemeToggle.astro";
 
@@ -16,10 +17,7 @@ const alternateHref = alternate ?? alternatePath(lang, here);
 
 const links = [
   { href: localePath(lang, "/"), label: t("nav.home") },
-  { href: localePath(lang, "/projects"), label: t("nav.projects") },
-  { href: localePath(lang, "/certifications"), label: t("nav.certifications") },
-  { href: localePath(lang, "/publications"), label: t("nav.publications") },
-  { href: localePath(lang, "/blog"), label: t("nav.blog") },
+  { href: localePath(lang, "/about"), label: t("nav.about") },
 ];
 
 const isCurrent = (href: string) =>
@@ -28,7 +26,7 @@ const isCurrent = (href: string) =>
 
 <header class="site-header">
   <div class="container site-header__inner">
-    <a class="brand" href={localePath(lang, "/")}>Yutaro Sakamoto</a>
+    <a class="brand" href={localePath(lang, "/")}>{site.name}</a>
     <nav
       class="site-nav"
       aria-label={lang === "ja" ? "サイト内ナビゲーション" : "Site navigation"}

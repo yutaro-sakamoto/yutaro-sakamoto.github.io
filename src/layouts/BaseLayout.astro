@@ -1,15 +1,10 @@
 ---
 import "../styles/global.css";
 import katexStylesheet from "katex/dist/katex.min.css?url";
+import { site } from "../data/site";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
-import {
-  alternatePath,
-  defaultLang,
-  languages,
-  useTranslations,
-  type Lang,
-} from "../i18n";
+import { alternatePath, defaultLang, languages, type Lang } from "../i18n";
 
 interface Props {
   lang: Lang;
@@ -36,13 +31,11 @@ const {
   alternate,
   hasTranslation = true,
 } = Astro.props;
-const t = useTranslations(lang);
-
-const siteName = t("site.title");
+const siteName = site.name;
 const pageTitle = title
   ? `${title} | ${siteName}`
-  : `${siteName} — ${t("home.tagline")}`;
-const pageDescription = description ?? t("site.description");
+  : `${siteName} — ${site.tagline[lang]}`;
+const pageDescription = description ?? site.description[lang];
 const canonical = new URL(
   Astro.url.pathname.replace(/\/+$/, "") || "/",
   Astro.site,

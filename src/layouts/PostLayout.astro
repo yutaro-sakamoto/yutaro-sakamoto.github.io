@@ -27,7 +27,7 @@ const translated = (await getPosts(otherLang)).find(
 );
 const alternate = translated
   ? postPath(translated)
-  : localePath(otherLang, "/blog");
+  : localePath(otherLang, "/");
 ---
 
 <BaseLayout
@@ -62,7 +62,7 @@ const alternate = translated
       <slot />
     </div>
 
-    <a class="back-link" href={localePath(lang, "/blog")}>
+    <a class="back-link" href={localePath(lang, "/")}>
       <Icon name="arrow-left" />
       {t("blog.backToList")}
     </a>

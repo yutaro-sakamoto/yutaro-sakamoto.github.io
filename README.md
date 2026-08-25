@@ -1,6 +1,7 @@
-# yutaro-sakamoto.github.io
+# Parse & Prove — yutaro-sakamoto.github.io
 
-坂本優太郎の個人サイト (プロフィール + 技術ブログ) のソースコードです。
+坂本優太郎の技術ブログ **Parse & Prove** のソースコードです。
+トップページが記事一覧で、`/about` に自己紹介ページがあります。
 [Astro](https://astro.build/) で静的サイトとしてビルドし、GitHub Actions で GitHub Pages に公開しています。
 
 公開URL: <https://yutaro-sakamoto.github.io/>
@@ -13,9 +14,9 @@
   - 数式は TeX 記法 (`$...$` / `$$...$$`) で書き、[KaTeX](https://katex.org/) がビルド時にHTMLへ変換。
     数式を含むページだけ KaTeX の CSS を読み込みます。
   - フロントマターは Zod で検証されるため、項目の書き間違いはビルドで落ちます。
-- **プロフィール** — OSS活動・保有資格・論文・学歴をデータファイルで管理し、日英両方のページに反映。
+- **自己紹介ページ (`/about`)** — OSS活動・保有資格・論文・学歴をデータファイルで管理し、日英両方のページに反映。
 - RSS (`/rss.xml`, `/en/rss.xml`)、`sitemap-index.xml`、OGPメタタグ、ダークモードを標準で用意。
-- 旧 Hugo サイトの `/posts/about` はトップページの自己紹介へリダイレクトします。
+- 旧 Hugo サイトの `/posts/about` は `/about` へリダイレクトします。
 
 ## ディレクトリ構成
 
@@ -25,6 +26,7 @@ src/
 ├── data/
 │   ├── blog/ja/*.md         日本語記事
 │   ├── blog/en/*.md         英語記事
+│   ├── site.ts              ブログ名・タグライン・説明文
 │   ├── profile.ts           プロフィール・学歴・受賞
 │   ├── projects.ts          OSS活動・開発実績
 │   ├── certifications.ts    保有資格
@@ -33,6 +35,7 @@ src/
 ├── components/              再利用する部品 (pages/ 配下は各ページの本体)
 ├── layouts/                 BaseLayout (head/header/footer) と PostLayout
 ├── pages/                   ルーティング。/ が日本語、/en/ が英語
+│                            / が記事一覧、/about が自己紹介
 ├── styles/global.css        デザイントークンと全体のスタイル
 └── utils/                   記事の取得・整形など
 public/                      そのまま配信されるファイル (favicon, mine-sweeper デモ)
@@ -81,6 +84,7 @@ Node.js 22 以上が必要です。
 
 | 更新したいもの | 編集するファイル             |
 | -------------- | ---------------------------- |
+| ブログ名・説明 | `src/data/site.ts`           |
 | 自己紹介・SNS  | `src/data/profile.ts`        |
 | 学歴・受賞     | `src/data/profile.ts`        |
 | OSS活動        | `src/data/projects.ts`       |

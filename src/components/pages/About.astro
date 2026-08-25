@@ -1,0 +1,122 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Icon from "../Icon.astro";
+import PostList from "../PostList.astro";
+import ProjectList from "../ProjectList.astro";
+import CertificationList from "../CertificationList.astro";
+import PublicationList from "../PublicationList.astro";
+import TimelineList from "../TimelineList.astro";
+import { awards, education, profile } from "../../data/profile";
+import { featuredProjects } from "../../data/projects";
+import { localePath, useTranslations, type Lang } from "../../i18n";
+import { getPosts } from "../../utils/posts";
+import { renderRichText } from "../../utils/inline-markdown";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const posts = (await getPosts(lang)).slice(0, 5);
+const lede =
+  lang === "ja"
+    ? `${profile.name.ja}のプロフィールと、これまでの開発・研究の記録です。`
+    : `About ${profile.name.en} — open source work, certifications and publications.`;
+---
+
+<BaseLayout lang={lang} title={t("about.title")} description={lede}>
+  <div class="container">
+    <section class="hero">
+      <div>
+        <h1 class="hero__name">{profile.name[lang]}</h1>
+        <p class="hero__sub">
+          {profile.nameSub[lang]} &middot; {t("about.role")}
+        </p>
+      </div>
+      <p class="hero__headline">{profile.headline[lang]}</p>
+      <div class="hero__links">
+        {
+          profile.links.map((link) => (
+            <a
+              class="pill"
+              href={link.href}
+              target="_blank"
+              rel="me noopener noreferrer"
+            >
+              <Icon name={link.icon ?? "mail"} />
+              {link.label}
+            </a>
+          ))
+        }
+        <span class="pill">{profile.location[lang]}</span>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section__head">
+        <h2 class="section__title" id="about">{t("about.title")}</h2>
+      </div>
+      <div class="prose" set:html={renderRichText(profile.bio[lang])} />
+      <ul class="interest-list" style="margin-top:1.5rem">
+        {profile.interests[lang].map((item) => <li class="pill">{item}</li>)}
+      </ul>
+    </section>
+
+    <section class="section">
+      <div class="section__head">
+        <h2 class="section__title" id="projects">{t("projects.title")}</h2>
+        <a class="section__link" href={localePath(lang, "/projects")}>
+          {lang === "ja" ? "すべて見る →" : "See all →"}
+        </a>
+      </div>
+      <ProjectList lang={lang} items={featuredProjects} />
+    </section>
+
+    <section class="section">
+      <div class="section__head">
+        <h2 class="section__title" id="posts">{t("home.recentPosts")}</h2>
+        <a class="section__link" href={localePath(lang, "/")}
+          >{t("home.viewAll")} →</a
+        >
+      </div>
+      <PostList lang={lang} posts={posts} />
+    </section>
+
+    <section class="section">
+      <div class="section__head">
+        <h2 class="section__title" id="certifications">
+          {t("certifications.title")}
+        </h2>
+        <a class="section__link" href={localePath(lang, "/certifications")}>
+          {lang === "ja" ? "すべて見る →" : "See all →"}
+        </a>
+      </div>
+      <CertificationList lang={lang} />
+    </section>
+
+    <section class="section">
+      <div class="section__head">
+        <h2 class="section__title" id="publications">
+          {t("publications.title")}
+        </h2>
+        <a class="section__link" href={localePath(lang, "/publications")}>
+          {lang === "ja" ? "すべて見る →" : "See all →"}
+        </a>
+      </div>
+      <PublicationList lang={lang} showAbstract={false} />
+    </section>
+
+    <section class="section section--muted">
+      <div class="section__head">
+        <h2 class="section__title" id="education">{t("education.title")}</h2>
+      </div>
+      <TimelineList lang={lang} entries={education} />
+
+      <h3 class="section__title" id="awards" style="margin-top:2rem">
+        {t("awards.title")}
+      </h3>
+      <TimelineList lang={lang} entries={awards} />
+    </section>
+  </div>
+</BaseLayout>
