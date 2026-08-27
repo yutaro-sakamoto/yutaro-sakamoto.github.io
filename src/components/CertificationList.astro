@@ -4,10 +4,15 @@ import { useTranslations, type Lang } from "../i18n";
 
 interface Props {
   lang: Lang;
+  /** 表示件数の上限。省略すると全件表示する。 */
+  limit?: number;
 }
 
-const { lang } = Astro.props;
+const { lang, limit } = Astro.props;
 const t = useTranslations(lang);
+const items = limit
+  ? certificationsByDate.slice(0, limit)
+  : certificationsByDate;
 
 const formatMonth = (value: string) => {
   const [year, month] = value.split("-");
@@ -23,7 +28,7 @@ const formatMonth = (value: string) => {
 ---
 
 {
-  certificationsByDate.length === 0 ? (
+  items.length === 0 ? (
     <p class="empty-note">
       {lang === "ja"
         ? "src/data/certifications.ts に資格を追加してください。"
@@ -31,7 +36,7 @@ const formatMonth = (value: string) => {
     </p>
   ) : (
     <ul class="cert-list">
-      {certificationsByDate.map((cert) => (
+      {items.map((cert) => (
         <li class="cert">
           <span
             class="cert__mark"
@@ -41,7 +46,19 @@ const formatMonth = (value: string) => {
             {categoryLabel[cert.category]}
           </span>
           <div>
-            <h3 class="cert__name">{cert.name[lang]}</h3>
+            <h3 class="cert__name">
+              {cert.officialUrl ? (
+                <a
+                  href={cert.officialUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {cert.name[lang]}
+                </a>
+              ) : (
+                cert.name[lang]
+              )}
+            </h3>
             <p class="cert__meta">
               <span>{cert.issuer[lang]}</span>
               {cert.issued && (
@@ -49,15 +66,6 @@ const formatMonth = (value: string) => {
                   {t("certifications.issued")}: {formatMonth(cert.issued)}
                   {cert.expires ? ` – ${formatMonth(cert.expires)}` : ""}
                 </span>
-              )}
-              {cert.verifyUrl && (
-                <a
-                  href={cert.verifyUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {t("certifications.verify")}
-                </a>
               )}
             </p>
           </div>

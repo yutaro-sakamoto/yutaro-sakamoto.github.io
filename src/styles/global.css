@@ -588,6 +588,12 @@ a.pill:hover {
   border-color: #2f6ed4;
 }
 
+.cert__mark[data-category="github"] {
+  background: #24292f;
+  color: #fff;
+  border-color: #101418;
+}
+
 .cert__mark[data-category="ipa"] {
   background: #0b5fa5;
   color: #fff;
@@ -598,6 +604,16 @@ a.pill:hover {
   font-size: 1rem;
   font-weight: 600;
   margin: 0;
+}
+
+.cert__name a {
+  color: var(--text);
+  text-decoration: none;
+}
+
+.cert__name a:hover {
+  color: var(--accent);
+  text-decoration: underline;
 }
 
 .cert__meta {
