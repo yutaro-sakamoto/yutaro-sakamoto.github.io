@@ -6,8 +6,10 @@ tags: ["Astro", "Markdown", "KaTeX"]
 math: true
 ---
 
-Articles on this site are plain Markdown (or MDX) files under `src/data/blog/en/`
-(`src/data/blog/ja/` for the Japanese versions). This post doubles as a reference for the available syntax.
+The source of this site is on GitHub at [yutaro-sakamoto/yutaro-sakamoto.github.io](https://github.com/yutaro-sakamoto/yutaro-sakamoto.github.io).
+
+Articles are plain Markdown (or MDX) files under [`src/data/blog/en/`](https://github.com/yutaro-sakamoto/yutaro-sakamoto.github.io/tree/main/src/data/blog/en)
+([`src/data/blog/ja/`](https://github.com/yutaro-sakamoto/yutaro-sakamoto.github.io/tree/main/src/data/blog/ja) for the Japanese versions). This post doubles as a reference for the available syntax.
 
 ## Frontmatter
 
@@ -25,7 +27,7 @@ math: true # set for posts containing TeX
 ---
 ```
 
-The schema is validated with Zod in `src/content.config.ts`, so a missing field fails the build instead of shipping a broken page.
+The schema is validated with Zod in [`src/content.config.ts`](https://github.com/yutaro-sakamoto/yutaro-sakamoto.github.io/blob/main/src/content.config.ts), so a missing field fails the build instead of shipping a broken page.
 
 ## Code
 
@@ -88,11 +90,11 @@ $$
 
 GitHub Flavored Markdown is enabled, so tables and task lists work too.
 
-| Language | Used for         | Notes                                     |
-| -------- | ---------------- | ----------------------------------------- |
-| COBOL    | Business logic   | Translated to Java by opensource COBOL 4J |
-| Rust     | Analysis tooling | Pairs well with tree-sitter               |
-| Lean     | Proofs           | Formalizing mathematics                   |
+| Dish          | Time   | Notes                            |
+| ------------- | ------ | -------------------------------- |
+| Curry         | 40 min | Even better the next day         |
+| Miso soup     | 10 min | Do not boil it after adding miso |
+| Fried chicken | 30 min | Fry it twice for a crisp coating |
 
 > Blockquotes are available as well.
 

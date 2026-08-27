@@ -6,7 +6,9 @@ tags: ["Astro", "Markdown", "KaTeX"]
 math: true
 ---
 
-このサイトの記事は `src/data/blog/ja/` (英語版は `src/data/blog/en/`) に Markdown または MDX ファイルを置くだけで公開されます。
+このサイトのソースコードは GitHub の [yutaro-sakamoto/yutaro-sakamoto.github.io](https://github.com/yutaro-sakamoto/yutaro-sakamoto.github.io) で公開しています。
+
+記事は [`src/data/blog/ja/`](https://github.com/yutaro-sakamoto/yutaro-sakamoto.github.io/tree/main/src/data/blog/ja) (英語版は [`src/data/blog/en/`](https://github.com/yutaro-sakamoto/yutaro-sakamoto.github.io/tree/main/src/data/blog/en)) に Markdown または MDX ファイルを置くだけで公開されます。
 この記事自体が、使える記法のサンプルになっています。
 
 ## フロントマター
@@ -25,7 +27,7 @@ math: true # 数式を使う記事は true
 ---
 ```
 
-スキーマは `src/content.config.ts` で Zod により検証されるため、必須項目が抜けているとビルドが失敗します。
+スキーマは [`src/content.config.ts`](https://github.com/yutaro-sakamoto/yutaro-sakamoto.github.io/blob/main/src/content.config.ts) で Zod により検証されるため、必須項目が抜けているとビルドが失敗します。
 
 ## コード
 
@@ -92,11 +94,11 @@ $$
 
 GitHub Flavored Markdown が有効なので、表やタスクリストも使えます。
 
-| 言語  | 用途         | 備考                             |
-| ----- | ------------ | -------------------------------- |
-| COBOL | 業務ロジック | opensource COBOL 4J でJavaへ変換 |
-| Rust  | 解析ツール   | tree-sitter との相性が良い       |
-| Lean  | 証明         | 数学の形式化                     |
+| 料理   | 調理時間 | メモ                       |
+| ------ | -------- | -------------------------- |
+| カレー | 40分     | 一晩寝かせると味がなじむ   |
+| 味噌汁 | 10分     | 味噌を入れたら煮立てない   |
+| 唐揚げ | 30分     | 二度揚げすると衣がカリッと |
 
 > 引用も使えます。
 
