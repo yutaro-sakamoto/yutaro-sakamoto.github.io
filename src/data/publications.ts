@@ -11,7 +11,10 @@ export type Publication = {
   /** 巻号・ページなど */
   detail?: string;
   type: "journal" | "conference" | "thesis" | "talk";
+  /** タイトルのリンク先。読者が確実に開けるURLを指定する。 */
   url?: string;
+  /** arXiv ID (例 "1610.02212")。 */
+  arxiv?: string;
   doi?: string;
   abstract?: Localized;
 };
@@ -28,8 +31,11 @@ export const publications: Publication[] = [
     year: 2019,
     detail: "Vol. 39, No. 1, pp. 117–123",
     type: "journal",
-    url: "https://www.dmgt.uz.zgora.pl/publish/bbl_view_pdf.php?ID=-1990",
-    doi: "10.7151/dmgt.2065",
+    // 出版社サイト (dmgt.uz.zgora.pl) は証明書チェーンが不完全でブラウザから開けないため、
+    // タイトルのリンク先は arXiv にしている。DOI は正式な引用先として併記する。
+    url: "https://arxiv.org/abs/1610.02212",
+    arxiv: "1610.02212",
+    doi: "10.7151/dmgt.2062",
     abstract: {
       ja: "二重一般化ペテルセングラフ DP(n, k) がハミルトン閉路を持つための条件を調べ、すべての n, k に対してハミルトン閉路が存在することを示した。",
       en: "We study Hamilton cycles in double generalized Petersen graphs DP(n, k) and show that they are Hamiltonian for all n and k.",

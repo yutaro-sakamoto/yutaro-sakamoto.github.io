@@ -1,6 +1,6 @@
 ---
 import { publicationsByYear } from "../data/publications";
-import { useTranslations, type Lang } from "../i18n";
+import type { Lang } from "../i18n";
 
 interface Props {
   lang: Lang;
@@ -8,7 +8,6 @@ interface Props {
 }
 
 const { lang, showAbstract = true } = Astro.props;
-const t = useTranslations(lang);
 ---
 
 {
@@ -49,9 +48,13 @@ const t = useTranslations(lang);
             <p class="pub__abstract">{pub.abstract[lang]}</p>
           )}
           <p class="pub__links">
-            {pub.url && (
-              <a href={pub.url} target="_blank" rel="noopener noreferrer">
-                {t("publications.pdf")}
+            {pub.arxiv && (
+              <a
+                href={`https://arxiv.org/abs/${pub.arxiv}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                arXiv:{pub.arxiv}
               </a>
             )}
             {pub.doi && (
