@@ -1,0 +1,43 @@
+---
+import { formatDate, useTranslations, type Lang } from "../i18n";
+import { postPath, readingTime, type Post } from "../utils/posts";
+
+interface Props {
+  lang: Lang;
+  posts: Post[];
+  showDescription?: boolean;
+}
+
+const { lang, posts, showDescription = true } = Astro.props;
+const t = useTranslations(lang);
+---
+
+{
+  posts.length === 0 ? (
+    <p class="empty-note">{t("blog.empty")}</p>
+  ) : (
+    <ul class="post-list">
+      {posts.map((post) => (
+        <li class="post-item">
+          <div class="post-item__meta">
+            <time datetime={post.data.pubDate.toISOString()}>
+              {formatDate(post.data.pubDate, lang)}
+            </time>
+            <span>
+              {readingTime(post.body)} {t("blog.readingTime")}
+            </span>
+            {post.data.tags.map((tag) => (
+              <span class="tag">{tag}</span>
+            ))}
+          </div>
+          <h3 class="post-item__title">
+            <a href={postPath(post)}>{post.data.title}</a>
+          </h3>
+          {showDescription && (
+            <p class="post-item__desc">{post.data.description}</p>
+          )}
+        </li>
+      ))}
+    </ul>
+  )
+}

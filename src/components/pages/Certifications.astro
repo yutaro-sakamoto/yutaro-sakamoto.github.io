@@ -1,0 +1,54 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import CertificationList from "../CertificationList.astro";
+import {
+  categoryLabel,
+  certificationCount,
+  certificationCountByCategory,
+} from "../../data/certifications";
+import { useTranslations, type Lang } from "../../i18n";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const total =
+  lang === "ja"
+    ? `全${certificationCount}件の資格を保有しています。`
+    : `${certificationCount} certifications in total.`;
+const lede =
+  lang === "ja"
+    ? `取得している資格の一覧です。${total}`
+    : `Professional certifications I currently hold. ${total}`;
+---
+
+<BaseLayout lang={lang} title={t("certifications.title")} description={lede}>
+  <div class="container container--narrow">
+    <h1 class="page-title">
+      {t("certifications.title")}
+      <span class="count count--lg">{certificationCount}</span>
+    </h1>
+    <p class="page-lede">
+      {
+        lang === "ja"
+          ? "取得している資格の一覧です。"
+          : "Professional certifications I currently hold."
+      }
+    </p>
+    <ul class="count-row">
+      {
+        certificationCountByCategory.map((entry) => (
+          <li class="pill">
+            {categoryLabel[entry.category]}
+            <strong>{entry.count}</strong>
+          </li>
+        ))
+      }
+    </ul>
+    <div style="margin-top:2rem">
+      <CertificationList lang={lang} />
+    </div>
+  </div>
+</BaseLayout>

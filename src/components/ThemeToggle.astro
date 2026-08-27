@@ -1,0 +1,67 @@
+---
+import Icon from "./Icon.astro";
+---
+
+<button
+  class="icon-button theme-toggle"
+  type="button"
+  data-theme-toggle
+  aria-label="Toggle color theme"
+  title="Toggle color theme"
+>
+  <Icon name="sun" class="icon-sun" />
+  <Icon name="moon" class="icon-moon" />
+</button>
+
+<style is:global>
+  .theme-toggle .icon-moon {
+    display: none;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .theme-toggle .icon-sun {
+      display: none;
+    }
+    :root:not([data-theme="light"]) .theme-toggle .icon-moon {
+      display: block;
+    }
+  }
+
+  :root[data-theme="dark"] .theme-toggle .icon-sun {
+    display: none;
+  }
+
+  :root[data-theme="dark"] .theme-toggle .icon-moon {
+    display: block;
+  }
+
+  :root[data-theme="light"] .theme-toggle .icon-sun {
+    display: block;
+  }
+
+  :root[data-theme="light"] .theme-toggle .icon-moon {
+    display: none;
+  }
+</style>
+
+<script>
+  const root = document.documentElement;
+  const button = document.querySelector<HTMLButtonElement>(
+    "[data-theme-toggle]",
+  );
+
+  const systemPrefersDark = () =>
+    window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+  button?.addEventListener("click", () => {
+    const current =
+      root.dataset.theme ?? (systemPrefersDark() ? "dark" : "light");
+    const next = current === "dark" ? "light" : "dark";
+    root.dataset.theme = next;
+    try {
+      localStorage.setItem("theme", next);
+    } catch {
+      /* localStorage が使えない環境では単に永続化しない */
+    }
+  });
+</script>

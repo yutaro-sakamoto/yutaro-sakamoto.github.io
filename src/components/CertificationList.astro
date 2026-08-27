@@ -1,0 +1,76 @@
+---
+import { categoryLabel, certificationsByDate } from "../data/certifications";
+import { useTranslations, type Lang } from "../i18n";
+
+interface Props {
+  lang: Lang;
+  /** 表示件数の上限。省略すると全件表示する。 */
+  limit?: number;
+}
+
+const { lang, limit } = Astro.props;
+const t = useTranslations(lang);
+const items = limit
+  ? certificationsByDate.slice(0, limit)
+  : certificationsByDate;
+
+const formatMonth = (value: string) => {
+  const [year, month] = value.split("-");
+  if (!year || !month) return value;
+  return lang === "ja"
+    ? `${year}年${Number(month)}月`
+    : new Intl.DateTimeFormat("en-US", {
+        year: "numeric",
+        month: "short",
+        timeZone: "UTC",
+      }).format(new Date(`${value}-01T00:00:00Z`));
+};
+---
+
+{
+  items.length === 0 ? (
+    <p class="empty-note">
+      {lang === "ja"
+        ? "src/data/certifications.ts に資格を追加してください。"
+        : "Add entries to src/data/certifications.ts."}
+    </p>
+  ) : (
+    <ul class="cert-list">
+      {items.map((cert) => (
+        <li class="cert">
+          <span
+            class="cert__mark"
+            data-category={cert.category}
+            aria-hidden="true"
+          >
+            {categoryLabel[cert.category]}
+          </span>
+          <div>
+            <h3 class="cert__name">
+              {cert.officialUrl ? (
+                <a
+                  href={cert.officialUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {cert.name[lang]}
+                </a>
+              ) : (
+                cert.name[lang]
+              )}
+            </h3>
+            <p class="cert__meta">
+              <span>{cert.issuer[lang]}</span>
+              {cert.issued && (
+                <span>
+                  {t("certifications.issued")}: {formatMonth(cert.issued)}
+                  {cert.expires ? ` – ${formatMonth(cert.expires)}` : ""}
+                </span>
+              )}
+            </p>
+          </div>
+        </li>
+      ))}
+    </ul>
+  )
+}

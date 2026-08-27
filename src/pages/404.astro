@@ -1,0 +1,23 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { langFromUrl, localePath, useTranslations } from "../i18n";
+
+const lang = langFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<BaseLayout
+  lang={lang}
+  title={t("404.title")}
+  alternate={localePath(lang === "ja" ? "en" : "ja", "/")}
+  hasTranslation={false}
+>
+  <div class="container container--narrow center-block">
+    <h1 class="page-title">404</h1>
+    <p class="page-lede">{t("404.title")}</p>
+    <p class="page-lede">{t("404.body")}</p>
+    <p style="margin-top:2rem">
+      <a href={localePath(lang, "/")}>{t("404.home")}</a>
+    </p>
+  </div>
+</BaseLayout>

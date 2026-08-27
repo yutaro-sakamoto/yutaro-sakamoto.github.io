@@ -1,0 +1,55 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Icon from "../Icon.astro";
+import PostList from "../PostList.astro";
+import { profile } from "../../data/profile";
+import { site } from "../../data/site";
+import { localePath, useTranslations, type Lang } from "../../i18n";
+import { getPosts } from "../../utils/posts";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const posts = await getPosts(lang);
+---
+
+<BaseLayout lang={lang}>
+  <div class="container container--narrow">
+    <section class="hero">
+      <div>
+        <h1 class="hero__name">{site.name[lang]}</h1>
+        <p class="hero__sub">{site.tagline[lang]}</p>
+      </div>
+      <p class="hero__headline">{site.description[lang]}</p>
+      <div class="hero__links">
+        <a class="pill" href={localePath(lang, "/about")}>
+          <Icon name="scholar" />
+          {profile.name[lang]} — {t("about.readMore")}
+        </a>
+        {
+          profile.links.map((link) => (
+            <a
+              class="pill"
+              href={link.href}
+              target="_blank"
+              rel="me noopener noreferrer"
+            >
+              <Icon name={link.icon ?? "mail"} />
+              {link.label}
+            </a>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section__head">
+        <h2 class="section__title" id="posts">{t("home.allPosts")}</h2>
+      </div>
+      <PostList lang={lang} posts={posts} />
+    </section>
+  </div>
+</BaseLayout>

@@ -1,0 +1,43 @@
+---
+import type { Project } from "../data/projects";
+import type { Lang } from "../i18n";
+import { renderRichText } from "../utils/inline-markdown";
+
+interface Props {
+  lang: Lang;
+  items: Project[];
+}
+
+const { lang, items } = Astro.props;
+---
+
+<div class="card-grid">
+  {
+    items.map((project) => (
+      <article class="card">
+        <div class="card__head">
+          <h3 class="card__title">
+            <a href={project.href} target="_blank" rel="noopener noreferrer">
+              {project.name}
+            </a>
+          </h3>
+          <span class="badge">{project.role[lang]}</span>
+          {project.stars !== undefined && (
+            <span class="stars" title={`${project.stars} stars on GitHub`}>
+              ★ {project.stars}
+            </span>
+          )}
+        </div>
+        <div
+          class="card__body"
+          set:html={renderRichText(project.description[lang])}
+        />
+        <div class="tag-row">
+          {project.tags.map((tag) => (
+            <span class="tag">{tag}</span>
+          ))}
+        </div>
+      </article>
+    ))
+  }
+</div>
