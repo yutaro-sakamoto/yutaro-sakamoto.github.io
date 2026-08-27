@@ -7,6 +7,7 @@ import CertificationList from "../CertificationList.astro";
 import PublicationList from "../PublicationList.astro";
 import TimelineList from "../TimelineList.astro";
 import { awards, education, profile } from "../../data/profile";
+import { certificationCount } from "../../data/certifications";
 import { featuredProjects } from "../../data/projects";
 import { localePath, useTranslations, type Lang } from "../../i18n";
 import { getPosts } from "../../utils/posts";
@@ -87,6 +88,7 @@ const lede =
       <div class="section__head">
         <h2 class="section__title" id="certifications">
           {t("certifications.title")}
+          <span class="count">{certificationCount}</span>
         </h2>
         <a class="section__link" href={localePath(lang, "/certifications")}>
           {lang === "ja" ? "すべて見る →" : "See all →"}

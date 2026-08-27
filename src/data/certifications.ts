@@ -190,6 +190,21 @@ export const certificationsByDate = [...certifications].sort((a, b) => {
   return 0;
 });
 
+/** 保有資格の総数。 */
+export const certificationCount = certifications.length;
+
+/** 発行元ごとの件数 (多い順)。 */
+export const certificationCountByCategory = [
+  ...certifications
+    .reduce(
+      (acc, cert) => acc.set(cert.category, (acc.get(cert.category) ?? 0) + 1),
+      new Map<Certification["category"], number>(),
+    )
+    .entries(),
+]
+  .map(([category, count]) => ({ category, count }))
+  .sort((a, b) => b.count - a.count);
+
 export const categoryLabel: Record<Certification["category"], string> = {
   aws: "AWS",
   gcp: "Google Cloud",

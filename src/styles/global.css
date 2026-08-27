@@ -625,6 +625,39 @@ a.pill:hover {
   align-items: center;
 }
 
+/* 件数バッジ (保有資格の総数など) */
+.count {
+  display: inline-block;
+  margin-left: 0.5rem;
+  padding: 0.05rem 0.5rem;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  vertical-align: middle;
+}
+
+.count--lg {
+  font-size: 1rem;
+  padding: 0.1rem 0.7rem;
+}
+
+.count-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  list-style: none;
+  padding: 0;
+  margin-top: 1rem;
+}
+
+.count-row .pill strong {
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
 .empty-note {
   border: 1px dashed var(--border-strong);
   border-radius: var(--radius);
