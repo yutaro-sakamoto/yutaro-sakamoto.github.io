@@ -56,6 +56,21 @@ Node.js 22 以上が必要です。
 `astro check` の都合で TypeScript は 6系 に固定しています
 ([TypeScript 7 のネイティブコンパイラは astro check が使うAPIを未提供のため](https://github.com/withastro/roadmap/discussions/1321))。
 
+### Dev Container
+
+[Dev Container](https://containers.dev/) の設定 ([`.devcontainer/`](.devcontainer/)) を用意しています。
+VS Code の Dev Containers 拡張や GitHub Codespaces で開くと、Node.js 22 と依存関係
+(`npm ci` を `postCreateCommand` で実行) が揃った状態で開発を始められます。
+`npm run dev` で起動する 4321 番ポートは自動で転送されます。
+
+コンテナ内での動作確認は [`.devcontainer/smoke-test.sh`](.devcontainer/smoke-test.sh) にまとめてあり、
+整形チェック → 型チェック → ビルド → 生成物の存在確認 → プレビューサーバへのHTTPリクエスト、
+までを一度に実行します。ローカルでもコンテナ内でもそのまま動きます。
+
+```bash
+./.devcontainer/smoke-test.sh
+```
+
 ## 記事を書く
 
 1. `src/data/blog/ja/<slug>.md` (英語版は `src/data/blog/en/<slug>.md`) を作成する。
@@ -96,10 +111,11 @@ Node.js 22 以上が必要です。
 
 ## CI/CD
 
-| ワークフロー                                 | トリガー                        | 内容                                          |
-| -------------------------------------------- | ------------------------------- | --------------------------------------------- |
-| [`ci.yml`](.github/workflows/ci.yml)         | Pull Request / main以外へのpush | 整形チェック → 型チェック → ビルド            |
-| [`deploy.yml`](.github/workflows/deploy.yml) | `main` へのpush / 手動実行      | 型チェック → ビルド → GitHub Pages へデプロイ |
+| ワークフロー                                             | トリガー                                   | 内容                                             |
+| -------------------------------------------------------- | ------------------------------------------ | ------------------------------------------------ |
+| [`ci.yml`](.github/workflows/ci.yml)                     | Pull Request / main以外へのpush            | 整形チェック → 型チェック → ビルド               |
+| [`deploy.yml`](.github/workflows/deploy.yml)             | `main` へのpush / 手動実行                 | 型チェック → ビルド → GitHub Pages へデプロイ    |
+| [`devcontainer.yml`](.github/workflows/devcontainer.yml) | Pull Request / main以外へのpush / 手動実行 | Dev Container をビルドし、その中でスモークテスト |
 
 デプロイを有効にするには、GitHubリポジトリの **Settings → Pages → Build and deployment → Source** を
 **GitHub Actions** に設定してください。
