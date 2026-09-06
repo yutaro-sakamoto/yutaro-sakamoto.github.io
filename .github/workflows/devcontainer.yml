@@ -1,0 +1,26 @@
+name: Dev Container
+
+on:
+  pull_request:
+  push:
+    branches-ignore: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  smoke-test:
+    name: Smoke test in Dev Container
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      # Dev Containers 公式の Action。.devcontainer/devcontainer.json から
+      # コンテナをビルドし、その中で runCmd を実行する。
+      - name: Build dev container and run smoke test
+        uses: devcontainers/ci@v0.3
+        with:
+          push: never
+          runCmd: ./.devcontainer/smoke-test.sh
