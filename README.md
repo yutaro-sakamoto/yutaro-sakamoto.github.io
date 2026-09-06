@@ -71,6 +71,17 @@ VS Code の Dev Containers 拡張や GitHub Codespaces で開くと、Node.js 22
 ./.devcontainer/smoke-test.sh
 ```
 
+## Claude Code で作業する
+
+[Claude Code](https://claude.com/claude-code) 向けの設定を用意しています。
+
+- [`CLAUDE.md`](CLAUDE.md) — プロジェクトの約束事、よく使うコマンド、落とし穴のまとめ。
+- [`.claude/settings.json`](.claude/settings.json) — `npm run` 系コマンドの許可設定と、
+  セッション開始時に `npm ci` を実行するフック、編集したファイルを Prettier で整形するフック。
+- [`.claude/skills/`](.claude/skills/) — `/new-post` (記事の雛形作成) と `/verify` (CI と同じチェックの実行)。
+
+個人用の設定は `.claude/settings.local.json` に書くと git の管理外になります。
+
 ## 記事を書く
 
 1. `src/data/blog/ja/<slug>.md` (英語版は `src/data/blog/en/<slug>.md`) を作成する。

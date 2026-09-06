@@ -8,3 +8,6 @@ dist
 
 # 個人ファイルを誤ってコミットしないための保険
 *.pdf
+
+# Claude Code の個人設定
+.claude/settings.local.json
